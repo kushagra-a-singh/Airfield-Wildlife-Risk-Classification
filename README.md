@@ -80,38 +80,63 @@ This system provides advanced AI-powered bird detection, species classification,
    # Open http://localhost:5000
    ```
 
+## ▶️ Running the Application
+
+For local development:
+```bash
+python app.py
+```
+This will start the Flask development server at http://localhost:5000.
+
+For production with better stream handling:
+```bash
+waitress-serve --host=0.0.0.0 --port=5000 app:app
+```
+This uses Waitress for a more robust production server.
+
 ## 📁 Project Structure
 
 ```
 Bird-Detection-and-Classification-System/
 ├── app.py                          # Main Flask application
-├── requirements.txt                 # Python dependencies
+├── requirements.txt                # Python dependencies
 ├── README.md                       # Project documentation
 ├── TECHNICAL_GUIDE.md              # Technical implementation guide
 ├── run_pipeline.py                 # Pipeline execution script
-├── download_airport_birds.py       # Dataset downloader
+├── download_airport_birds.py       # Airport birds dataset downloader
+├── download_comprehensive_bird_datasets.py # Comprehensive dataset downloader
+├── download_cormorant_stork.py     # Additional dataset downloader
+├── expand_airport7_dataset.py      # Dataset expansion script
+├── split_train_val_airport7.py     # Train/val split script
 ├── train_bird_classifier.py        # Model training script
 ├── test_system.py                  # Testing suite
 ├── data/                           # Data directory
-│   ├── cub_200_2011/              # CUB-200-2011 dataset (11,788 images)
-│   ├── integrated_birds/           # Integrated dataset (640 images)
-│   └── dataset_info.json          # Dataset information
-├── src/                           # Source code
-│   ├── detection/                 # Detection modules
+│   ├── cub_200_2011/
+│   │   └── CUB_200_2011/           # CUB-200-2011 dataset (11,788 images)
+│   ├── integrated_birds/           # Integrated dataset (CUB-200-2011 + airport species)
+│   └── dataset_info.json           # Dataset information
+├── models/                         # Trained models
+├── output_improved/                # Test outputs
+├── annotated_frames/               # Annotated output frames
+├── src/                            # Source code
+│   ├── detection/                  # Detection modules
 │   │   ├── enhanced_bird_detector.py
 │   │   └── bird_detector.py
-│   ├── classification/            # Classification modules
+│   ├── classification/             # Classification modules
 │   │   └── species_classifier.py
-│   ├── risk_assessment/           # Risk assessment modules
+│   ├── risk_assessment/            # Risk assessment modules
 │   │   └── risk_calculator.py
-│   └── utils/                     # Utility modules
+│   └── utils/                      # Utility modules
 │       ├── video_processor.py
-│       └── dashboard_utils.py
-├── models/                        # Trained models
-├── output_improved/               # Test outputs
-├── templates/                     # HTML templates
-└── static/                       # Web app assets
+│       ├── dashboard_utils.py
+│       └── model_downloader.py
+├── templates/                      # HTML templates
+└── (static/)                       # Web app assets (if present)
 ```
+
+> **Note:** The `integrated_birds` dataset contains both airport-relevant species and CUB-200-2011 classes, organized by species folders in `train/` and `val/`.
+> The CUB-200-2011 dataset is located at `data/cub_200_2011/CUB_200_2011/`.
+> The `static/` folder may not be present in all setups.
 
 ## 🎯 Target Species
 
@@ -137,29 +162,24 @@ The system is specifically designed to detect and classify these bird species:
 - **Fine-grained classification** for comprehensive bird identification
 - **Bounding box annotations** for precise detection training
 
-## 🔧 API Endpoints
+## 🎯 API Endpoints
 
-### Core Endpoints
-- `GET /` - Main dashboard
-- `GET /dashboard` - Advanced analytics dashboard
-- `GET /stream` - Real-time video stream
+### Dashboard & File Upload
+- `GET /` — Main dashboard
+- `POST /upload` — Upload image or video for processing (used by dashboard)
+
+### Streaming
+- `GET /stream` — Real-time video stream with detection overlays
 
 ### API Endpoints
-- `GET /api/status` - System status and statistics
-- `GET /api/statistics` - Detailed system statistics
-- `POST /api/detect` - Single image detection
-- `GET /api/alerts` - Risk alerts and notifications
-- `GET /api/health` - System health check
-- `GET /api/bird_classes` - Bird class information
-- `GET /api/risk_analysis` - Detailed risk analysis
+- `POST /api/detect` — Single image detection and risk assessment
+- `GET /api/risk_trend` — Risk trend for current session
+- `GET /api/session_summary` — Session summary (species distribution, risk levels)
+- `GET /data/sample_videos/<filename>` — Download uploaded sample videos
 
 ### Example API Usage
 ```python
 import requests
-
-# Get system status
-response = requests.get('http://localhost:5000/api/status')
-status = response.json()
 
 # Upload image for detection
 with open('bird_image.jpg', 'rb') as f:
@@ -167,6 +187,8 @@ with open('bird_image.jpg', 'rb') as f:
     response = requests.post('http://localhost:5000/api/detect', files=files)
     results = response.json()
 ```
+
+> **Note:** The main workflow, dashboard, and API are focused on the Airport7 dataset (7 classes: black_kite, brahminy_kite, cormorant, stork, egret, pigeon, crow). Fine-grained classification with CUB-200-2011 is available for research but not the default.
 
 ## 📊 Risk Assessment Model
 
@@ -294,10 +316,10 @@ RISK_WEIGHTS = {
 - **Use**: Fine-grained bird species classification
 
 ### Integrated Airport Birds Dataset
-- **Images**: 640
-- **Species**: 7 airport-relevant species
-- **Format**: High-quality images with species labels
-- **Use**: Airport-specific bird detection and risk assessment
+- **Images**: 640+ airport images, 11,788+ CUB-200-2011 images
+- **Species**: 7 airport-relevant species + 200 CUB-200-2011 species
+- **Format**: High-quality images with species labels, organized by folders
+- **Use**: Airport-specific and fine-grained bird detection and risk assessment
 
 ### Airport Bird Classes
 - **Categories**: 4 (kites, raptors, waterfowl, small_birds)

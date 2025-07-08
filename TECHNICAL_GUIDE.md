@@ -59,7 +59,7 @@
 
 ### CUB-200-2011 Dataset
 - **Source**: Caltech-UCSD Birds-200-2011
-- **Location**: `data/cub_200_2011/`
+- **Location**: `data/cub_200_2011/CUB_200_2011/`
 - **Size**: ~1.1GB
 - **Images**: 11,788 images
 - **Species**: 200 bird species
@@ -74,29 +74,35 @@
 
 ### Integrated Airport Birds Dataset
 - **Location**: `data/integrated_birds/`
-- **Images**: 640 images
-- **Species**: 7 airport-relevant species
+- **Images**: 640+ airport images, 11,788+ CUB-200-2011 images
+- **Species**: 7 airport-relevant species + 200 CUB-200-2011 species
 - **Structure**:
   ```
   data/integrated_birds/
   ├── train/
-  │   ├── black_kite/ (100 images)
-  │   ├── brahminy_kite/ (100 images)
-  │   ├── egret/ (80 images)
-  │   ├── pigeon/ (120 images)
-  │   ├── crow/ (100 images)
-  │   ├── red_kite/ (80 images)
-  │   └── white_tailed_kite/ (60 images)
+  │   ├── black_kite/
+  │   ├── brahminy_kite/
+  │   ├── egret/
+  │   ├── pigeon/
+  │   ├── crow/
+  │   ├── red_kite/
+  │   ├── white_tailed_kite/
+  │   ├── 001.Black_footed_Albatross/
+  │   ├── ... (other CUB-200-2011 species folders)
   └── val/
+      ├── black_kite/
+      ├── ... (other species)
+      ├── 001.Black_footed_Albatross/
+      └── ...
   ```
 
 ### Airport Bird Classes
-- **Location**: `data/classes/airport_birds.json`
 - **Categories**:
   - **Kites** (High Risk): black_kite, brahminy_kite, red_kite
   - **Raptors** (High Risk): eagle, hawk, falcon, vulture
   - **Waterfowl** (Medium Risk): cormorant, stork, egret, heron, duck, goose
   - **Small Birds** (Low Risk): sparrow, finch, starling, pigeon
+- **Note:** Class information is inferred from folder names in `integrated_birds/train/` and `integrated_birds/val/`. The file `data/classes/airport_birds.json` does not exist.
 
 ## 🔧 Configuration Options
 
@@ -479,3 +485,34 @@ for risk in risks:
 ---
 
 **Note**: This system is designed for research and development purposes. For production deployment, additional safety measures and validation are recommended. 
+
+## 🛠️ API and Dashboard
+
+### Dashboard & File Upload
+- `GET /` — Main dashboard (web interface)
+- `POST /upload` — Upload image or video for processing (used by dashboard)
+
+### Streaming
+- `GET /stream` — Real-time video stream with detection overlays
+
+### API Endpoints
+- `POST /api/detect` — Single image detection and risk assessment
+- `GET /api/risk_trend` — Risk trend for current session
+- `GET /api/session_summary` — Session summary (species distribution, risk levels)
+- `GET /data/sample_videos/<filename>` — Download uploaded sample videos
+
+> **Note:** The main workflow, dashboard, and API are focused on the Airport7 dataset (7 classes: black_kite, brahminy_kite, cormorant, stork, egret, pigeon, crow). Fine-grained classification with CUB-200-2011 is available for research but not the default. 
+
+## ▶️ Running the Application
+
+For local development:
+```bash
+python app.py
+```
+This will start the Flask development server at http://localhost:5000.
+
+For production with better stream handling:
+```bash
+waitress-serve --host=0.0.0.0 --port=5000 app:app
+```
+This uses Waitress for a more robust production server. 
