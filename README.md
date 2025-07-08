@@ -2,37 +2,37 @@
 
 A comprehensive real-time bird detection and classification system designed for airport bird strike prevention and wildlife monitoring.
 
-## 🎯 Project Overview
+## Project Overview
 
 This system provides advanced AI-powered bird detection, species classification, and risk assessment capabilities specifically designed for airport safety applications. It can detect and classify various bird species including Black Kites, Brahminy Kites, Cormorants, Storks, and Egrets, while providing real-time risk assessment and alerting.
 
-## ✨ Key Features
+## Key Features
 
-### 🦅 **Bird Detection & Classification**
+### **Bird Detection & Classification**
 - **Multi-model Ensemble Detection**: Uses multiple YOLO models for enhanced accuracy
 - **Real-time Species Classification**: Identifies 207 bird species (200 CUB + 7 Airport Birds)
 - **Size and Behavior Analysis**: Estimates bird size categories and flight behaviors
 - **Altitude and Speed Estimation**: Calculates bird altitude and speed for risk assessment
 
-### 🚨 **Risk Assessment & Safety**
+### **Risk Assessment & Safety**
 - **Comprehensive Risk Scoring**: Multi-factor risk assessment (0-10 scale)
 - **Airport-Specific Categories**: High, medium, and low-risk bird classifications
 - **Collision Probability**: Real-time collision risk calculation
 - **Severity Estimation**: Critical, high, medium, and low severity levels
 
-### 📊 **Real-time Analytics & Dashboard**
+### **Real-time Analytics & Dashboard**
 - **Live Video Streaming**: Real-time video processing with detection overlays
 - **Interactive Dashboard**: Comprehensive analytics and visualization
 - **Risk Trend Analysis**: Historical risk pattern tracking
 - **Performance Metrics**: FPS, detection rates, and system statistics
 
-### 🔧 **Advanced Features**
+### **Advanced Features**
 - **Trajectory Tracking**: Bird movement pattern analysis
 - **Alert System**: High-risk event notifications
 - **API Endpoints**: RESTful API for integration
 - **Data Export**: Comprehensive reporting capabilities
 
-## 🚀 Quick Start (5 Minutes)
+## Quick Start 
 
 ### Prerequisites
 - Python 3.8+
@@ -80,7 +80,7 @@ This system provides advanced AI-powered bird detection, species classification,
    # Open http://localhost:5000
    ```
 
-## ▶️ Running the Application
+## Running the Application
 
 For local development:
 ```bash
@@ -94,7 +94,7 @@ waitress-serve --host=0.0.0.0 --port=5000 app:app
 ```
 This uses Waitress for a more robust production server.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Bird-Detection-and-Classification-System/
@@ -130,13 +130,10 @@ Bird-Detection-and-Classification-System/
 │       ├── video_processor.py
 │       ├── dashboard_utils.py
 │       └── model_downloader.py
-├── templates/                      # HTML templates
-└── (static/)                       # Web app assets (if present)
+└──templates/                      # Frontend files
 ```
 
 > **Note:** The `integrated_birds` dataset contains both airport-relevant species and CUB-200-2011 classes, organized by species folders in `train/` and `val/`.
-> The CUB-200-2011 dataset is located at `data/cub_200_2011/CUB_200_2011/`.
-> The `static/` folder may not be present in all setups.
 
 ## 🎯 Target Species
 
@@ -190,7 +187,7 @@ with open('bird_image.jpg', 'rb') as f:
 
 > **Note:** The main workflow, dashboard, and API are focused on the Airport7 dataset (7 classes: black_kite, brahminy_kite, cormorant, stork, egret, pigeon, crow). Fine-grained classification with CUB-200-2011 is available for research but not the default.
 
-## 📊 Risk Assessment Model
+## Risk Assessment Model
 
 The system uses a comprehensive risk assessment model with the following factors:
 
@@ -206,7 +203,7 @@ The system uses a comprehensive risk assessment model with the following factors
 - **Moderate (3-6)**: Elevated risk, increased attention
 - **High (6-10)**: Critical risk, immediate action required
 
-## 🎨 Dashboard Features
+## Dashboard Features
 
 ### Main Dashboard
 - Real-time video streaming with detection overlays
@@ -222,7 +219,7 @@ The system uses a comprehensive risk assessment model with the following factors
 - Performance metrics
 - Historical data tracking
 
-## 🔍 Detection Capabilities
+## Detection Capabilities
 
 ### Multi-Model Ensemble
 - **YOLOv8 Nano**: Fast detection for real-time processing
@@ -235,7 +232,7 @@ The system uses a comprehensive risk assessment model with the following factors
 - **Size Estimation**: Bird size category classification
 - **Trajectory Tracking**: Movement pattern analysis
 
-## 📈 Performance Metrics
+## Performance Metrics
 
 ### System Performance
 - **FPS**: 25-30 frames per second (real-time)
@@ -249,7 +246,7 @@ The system uses a comprehensive risk assessment model with the following factors
 - **Alert Response Time**: <2 seconds
 - **False Positive Rate**: <5%
 
-## 🛠️ Configuration
+## 🛠Configuration
 
 ### Environment Variables
 ```bash
@@ -277,7 +274,7 @@ RISK_WEIGHTS = {
 }
 ```
 
-## 🚨 Troubleshooting
+## roubleshooting
 
 ### Common Issues
 
@@ -307,7 +304,7 @@ RISK_WEIGHTS = {
 - **Confidence**: Adjust thresholds based on use case
 - **Resolution**: Lower resolution for speed
 
-## 📊 Dataset Information
+## Dataset Information
 
 ### CUB-200-2011 Dataset
 - **Images**: 11,788
@@ -326,13 +323,6 @@ RISK_WEIGHTS = {
 - **Species**: 16+ airport-relevant species
 - **Use**: Airport-specific bird detection and risk assessment
 
-## 🎯 Airport-Specific Features
-
-### High-Risk Bird Detection
-- **Kite Detection**: Specialized for kites (common at airports)
-- **Raptor Identification**: Large birds of prey
-- **Waterfowl Monitoring**: Large water birds
-
 ### Risk Assessment
 - **Species-Specific Multipliers**: Different risk factors
 - **Behavior Analysis**: Flight patterns
@@ -344,7 +334,7 @@ RISK_WEIGHTS = {
 - **Trend Analysis**: Risk patterns
 - **Real-time Monitoring**: Continuous surveillance
 
-## 📝 API Examples
+## API Examples
 
 ### Python API
 ```python
@@ -368,13 +358,5 @@ for risk in risks:
     print(f"Risk Level: {risk.risk_level}")
     print(f"Risk Score: {risk.risk_score}")
 ```
-
-## 🚀 Next Steps
-
-1. **Download datasets**: `python download_airport_birds.py`
-2. **Train models**: `python train_bird_classifier.py`
-3. **Test system**: `python test_system.py`
-4. **Run application**: `python app.py`
-5. **Access dashboard**: http://localhost:5000
 
 For detailed technical information, see `TECHNICAL_GUIDE.md`. 
