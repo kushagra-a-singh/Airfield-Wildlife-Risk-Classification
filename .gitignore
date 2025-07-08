@@ -27,7 +27,7 @@ Thumbs.db
 
 
 !models/*.json
-
+models/yolov8x.pt
 
 *test_report*.json 
 resnet18_bird_classifier.pth
