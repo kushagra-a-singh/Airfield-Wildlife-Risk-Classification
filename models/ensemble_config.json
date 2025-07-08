@@ -1,0 +1,22 @@
+{
+  "models": [
+    "resnet18_airport7",
+    "mobilenetv2_airport7"
+  ],
+  "accuracies": {
+    "resnet18": 46.808510638297875,
+    "mobilenetv2": 63.829787234042556
+  },
+  "ensemble_method": "average",
+  "airport_birds": [
+    "black_kite",
+    "brahminy_kite",
+    "cormorant",
+    "stork",
+    "egret",
+    "pigeon",
+    "crow"
+  ],
+  "num_classes": 7,
+  "dataset": "airport7"
+}
