@@ -1,4 +1,4 @@
-# AI-Based Bird Detection and Classification System
+# Airfield Wildlife Risk Classification
 
 A comprehensive real-time bird detection and classification system designed for airport bird strike prevention and wildlife monitoring.
 
