@@ -1,6 +1,6 @@
 # Technical Implementation Guide
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -18,7 +18,7 @@
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 🎯 Ensemble Model System
+## Ensemble Model System
 
 ### Model Selection Options
 
@@ -55,7 +55,7 @@
 - **ResNet18**: 93%+
 - **MobileNetV2**: 90%+
 
-## 📊 Dataset Management
+## Dataset Management
 
 ### CUB-200-2011 Dataset
 - **Source**: Caltech-UCSD Birds-200-2011
@@ -153,7 +153,7 @@
 }
 ```
 
-## 🚀 Training Your Models
+## Training Your Models
 
 ### Step 1: Prepare Your Data
 ```
@@ -189,7 +189,7 @@ Check the `models/` directory for:
 - `mobilenetv2_bird_classifier.pth`
 - `ensemble_config.json`
 
-## 🧪 Testing Commands
+## Testing Commands
 
 ### Quick Test
 ```bash
@@ -215,7 +215,7 @@ python test_system.py
 # Select option 4 for custom configuration
 ```
 
-## 📊 Risk Assessment Model
+## Risk Assessment Model
 
 ### Risk Factors (Weighted)
 - **Size (25%)**: Large birds pose higher collision risk
@@ -243,7 +243,7 @@ risk_factors = {
 risk_score = risk_calc.calculate_custom_risk(risk_factors)
 ```
 
-## 🔍 Detection Capabilities
+## Detection Capabilities
 
 ### Multi-Model Ensemble
 - **YOLOv8 Nano**: Fast detection for real-time processing
@@ -256,7 +256,7 @@ risk_score = risk_calc.calculate_custom_risk(risk_factors)
 - **Size Estimation**: Bird size category classification
 - **Trajectory Tracking**: Movement pattern analysis
 
-## 📈 Performance Metrics
+## Performance Metrics
 
 ### System Performance
 - **FPS**: 25-30 frames per second (real-time)
@@ -270,7 +270,7 @@ risk_score = risk_calc.calculate_custom_risk(risk_factors)
 - **Alert Response Time**: <2 seconds
 - **False Positive Rate**: <5%
 
-## 🛠️ Advanced Usage
+## Advanced Usage
 
 ### Using the System
 
@@ -357,7 +357,7 @@ risk_calc.size_factors['large'] = 4.0  # Increase large bird risk
 risk_calc.behavior_factors['diving'] = 3.0  # Increase diving risk
 ```
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -386,7 +386,7 @@ risk_calc.behavior_factors['diving'] = 3.0  # Increase diving risk
 - **Confidence**: Adjust thresholds based on use case
 - **Resolution**: Lower resolution for speed
 
-## 📊 Dataset Integration
+## Dataset Integration
 
 ### Data Preprocessing
 ```python
@@ -443,14 +443,14 @@ transform = A.Compose([
 ])
 ```
 
-## 🎯 Best Practices
+## Best Practices
 
 1. **For Production**: Use ensemble mode with balanced detection
 2. **For Real-time**: Use MobileNetV2 with fast detection
 3. **For Analysis**: Use ResNet18 with accurate detection
 4. **For Testing**: Use model comparison to find best fit
 
-## 📝 API Examples
+## API Examples
 
 ### Python API
 ```python
@@ -475,18 +475,7 @@ for risk in risks:
     print(f"Risk Score: {risk.risk_score}")
 ```
 
-## 🔄 Version History
-
-- **v1.0.0**: Initial release with basic detection and classification
-- **v1.1.0**: Added risk assessment and dashboard
-- **v1.2.0**: Enhanced with multi-model ensemble and real-time analytics
-- **v1.3.0**: Comprehensive airport safety features and advanced visualization
-
----
-
-**Note**: This system is designed for research and development purposes. For production deployment, additional safety measures and validation are recommended. 
-
-## 🛠️ API and Dashboard
+## API and Dashboard
 
 ### Dashboard & File Upload
 - `GET /` — Main dashboard (web interface)
@@ -501,9 +490,9 @@ for risk in risks:
 - `GET /api/session_summary` — Session summary (species distribution, risk levels)
 - `GET /data/sample_videos/<filename>` — Download uploaded sample videos
 
-> **Note:** The main workflow, dashboard, and API are focused on the Airport7 dataset (7 classes: black_kite, brahminy_kite, cormorant, stork, egret, pigeon, crow). Fine-grained classification with CUB-200-2011 is available for research but not the default. 
+> **Note:** The main workflow, dashboard and API are focused on the Airport7 dataset (7 classes: black_kite, brahminy_kite, cormorant, stork, egret, pigeon, crow). Fine-grained classification with CUB-200-2011 is available for research but not the default. 
 
-## ▶️ Running the Application
+## Running the Application
 
 For local development:
 ```bash
